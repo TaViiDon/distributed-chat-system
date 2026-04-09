@@ -21,7 +21,7 @@ Implement a simple client-server chat system using Java sockets. This demonstrat
 
 ### Running the Server
 ```bash
-javac src/main/java/com/distributed/chat/ChatServer.java
+java src/main/java/com/distributed/chat/ChatServer.java
 java com.distributed.chat.ChatServer
 ```
 
@@ -31,7 +31,3 @@ javac src/main/java/com/distributed/chat/ChatClient.java
 java com.distributed.chat.ChatClient
 ```
 
-## Team Members
-- TaViiDon (GitHub: [TaViiDon](https://github.com/TaViiDon))
-- [Other Team Member]
-- [Other Team Member]
