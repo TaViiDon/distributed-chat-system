@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(javac src/main/java/com/distributed/chat/*.java)",
+      "Bash(ls c:/Users/tgordon/distributed-chat-system/*.class)",
+      "Bash(ls c:/Users/tgordon/distributed-chat-system/src/main/java/com/distributed/chat/*.class)"
+    ]
+  }
+}
