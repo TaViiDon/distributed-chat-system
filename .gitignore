@@ -23,6 +23,9 @@
 hs_err_pid*
 replay_pid*
 
+# Claude Code
+.claude/
+
 # IDE specific files
 .idea/
 .vscode/
