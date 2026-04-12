@@ -1,4 +1,4 @@
-package com.distributed.chat;
+package com.distributed.chat.Client;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -9,6 +9,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import com.distributed.chat.Server.Broadcaster;
+import com.distributed.chat.Server.Recipient;
 
 //ChatClient - Client-side component of the distributed RMI chat system.
 
@@ -33,7 +36,7 @@ public class ChatClient extends UnicastRemoteObject implements Recipient {
 
     // Recipient interface implementation  (called REMOTELY by the Broadcaster)
     @Override
-    public void RecipientReceiveMessage(String message) throws RemoteException {
+    public void recipientReceiveMessage(Recipient recipient , String message) throws RemoteException {
         // Capture the moment this client received the message for ordering and review purposes
         String timestamp    = LocalDateTime.now()
                                            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));

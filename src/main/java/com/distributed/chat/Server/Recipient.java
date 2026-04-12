@@ -1,4 +1,4 @@
-package com.distributed.chat;
+package com.distributed.chat.Server;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -6,5 +6,5 @@ import java.rmi.RemoteException;
 // Recipient interface - to be implemented 
 
 public interface Recipient extends Remote {
-    void RecipientReceiveMessage(String message) throws RemoteException;
+    void recipientReceiveMessage(Recipient recipient , String message) throws RemoteException;
 }

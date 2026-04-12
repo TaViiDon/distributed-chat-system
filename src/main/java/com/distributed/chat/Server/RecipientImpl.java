@@ -1,4 +1,4 @@
-package com.distributed.chat;
+package com.distributed.chat.Server;
 
 import java.rmi.server.UnicastRemoteObject;
 import java.rmi.RemoteException;
@@ -13,7 +13,7 @@ public class RecipientImpl extends UnicastRemoteObject implements Recipient {
     }
 
     @Override
-    public void RecipientReceiveMessage(String message) throws RemoteException {
+    public void recipientReceiveMessage(Recipient recipient , String message) throws RemoteException {
         broadcastMessages.add(message);
         System.out.println("Received: " + message);
     }
