@@ -1,4 +1,4 @@
-package com.distributed.chat;
+ package com.distributed.chat;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -44,7 +44,7 @@ public class ChatClient extends UnicastRemoteObject implements Recipient {
 
         // Notify the user mid-session that a new message has arrived
         System.out.println("\n[Incoming] " + formattedEntry);
-        System.out.print("SELECT 1 TO BROADCAST OR 2 TO VIEW BROADCAST: ");
+        System.out.print("SELECT 1 TO BROADCAST, 2 TO VIEW, OR 99 TO EXIT: ");
     }
 
     // Client helper methods
@@ -54,7 +54,7 @@ public class ChatClient extends UnicastRemoteObject implements Recipient {
             return;
         }
 
-        System.out.println("\n=== Received Broadcasts (" + receivedMessages.size() + ") ===");
+        System.out.println("\n=== Received Broadcasts ===");
         for (int i = 0; i < receivedMessages.size(); i++) {
             // 1-indexed numbering for readability
             System.out.println((i + 1) + ". " + receivedMessages.get(i));
@@ -120,7 +120,7 @@ public class ChatClient extends UnicastRemoteObject implements Recipient {
 
             // DO-WHILE menu loop  (exit condition: option == 99)
             do {
-                System.out.println("SELECT 1 TO BROADCAST OR 2 TO VIEW BROADCAST");
+                System.out.println("SELECT 1 TO BROADCAST OR 2 TO VIEW BROADCAST,OR 99 TO EXIT");
                 option = Integer.parseInt(scanner.nextLine().trim());
 
                 // IF option == 1 THEN — send a broadcast message
@@ -137,7 +137,7 @@ public class ChatClient extends UnicastRemoteObject implements Recipient {
                 }
 
                 // IF option != 1 OR option != 2 THEN — invalid selection
-                if (option != 1 || option != 2) {
+                if (option != 1 || option != 2 && option != 99) {
                     System.out.println("INVALID INPUT\n");
                 }
 
