@@ -37,4 +37,6 @@ bin/
 
 #Personal Class Implementation
 pServer.java
-
+src\main\java\com\distributed\chat\Client\BroadcasterImpl.java
+.\src\main\java\com\distributed\chat\Server\BroadcasterImpl.java
+Todo.txt

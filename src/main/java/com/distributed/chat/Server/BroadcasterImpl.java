@@ -4,13 +4,14 @@
 
 package com.distributed.chat.Server;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.*;
 import java.util.ArrayList;
 
 
 public class BroadcasterImpl extends UnicastRemoteObject implements Broadcaster {
-    private ArrayList<Recipient> broadcastList = new ArrayList<>();
+    private static ArrayList<Recipient> broadcastList = new ArrayList<>();
 
     BroadcasterImpl() throws RemoteException { super(); } 
 
@@ -28,8 +29,15 @@ public class BroadcasterImpl extends UnicastRemoteObject implements Broadcaster 
         Integer isRegistrationSuccessful = -1;
 
         if(isPresent == false){
+            
             broadcastList.add(recipient);
             isRegistrationSuccessful = 1;
+
+            System.out.println(recipient.toString());
+
+            // BroadcasterImpl.broadcastList.forEach(registeredRecipient -> {
+            //     System.out.println("\nRegistered Recipient: \n" + registeredRecipient.toString());
+            // });
         }
 
         return isRegistrationSuccessful;
@@ -41,17 +49,26 @@ public class BroadcasterImpl extends UnicastRemoteObject implements Broadcaster 
             return;
         }
 
+        if (BroadcasterImpl.broadcastList.size() == 1 && BroadcasterImpl.broadcastList.contains(sender)) {
+            System.out.println("No other recipients to broadcast to");
+            return;
+        }
+
         for(Recipient listedRecipient : broadcastList) {
-            if(sender != listedRecipient) {
-                RecipientImpl recipientImpl = new RecipientImpl();
-                recipientImpl.recipientReceiveMessage(sender , message);
+            if(!sender.equals(listedRecipient)) {
+                listedRecipient.recipientReceiveMessage(sender, message);
+                System.out.println(sender + " Received message");
             }
         }
 
-        System.out.println("Message broadcasted successfully");
+        System.out.println("Message broadcasted successfully✅");
 
     }
 
+    @Override
+    public ArrayList<Recipient> getBroadcastList() {
+        return broadcastList;
+    }
 
     
 }

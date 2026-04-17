@@ -36,12 +36,12 @@ public class ChatClient extends UnicastRemoteObject implements Recipient {
 
     // Recipient interface implementation  (called REMOTELY by the Broadcaster)
     @Override
-    public void recipientReceiveMessage(Recipient recipient , String message) throws RemoteException {
+    public void recipientReceiveMessage(Recipient sender , String message) throws RemoteException {
         // Capture the moment this client received the message for ordering and review purposes
         String timestamp    = LocalDateTime.now()
                                            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         String formattedEntry = "[" + timestamp + "] " + message;
-
+        
         // Persist the message locally so the user can review it via option 2
         receivedMessages.add(formattedEntry);
 
@@ -64,6 +64,7 @@ public class ChatClient extends UnicastRemoteObject implements Recipient {
         }
         System.out.println("========================================");
     }
+    
     private static int getPortNumber(Scanner scanner) {
         System.out.print("Enter server port number: ");
         return Integer.parseInt(scanner.nextLine().trim());
@@ -121,9 +122,12 @@ public class ChatClient extends UnicastRemoteObject implements Recipient {
                 System.out.println("FAILED TO REGISTER TO BROADCASTER, TRY AGAIN");
             }
 
+
+            // Display the list of registered recipients
+
             // DO-WHILE menu loop  (exit condition: option == 99)
             do {
-                System.out.println("SELECT 1 TO BROADCAST OR 2 TO VIEW BROADCAST");
+                System.out.println("SELECT 1 TO BROADCAST , 2 TO VIEW BROADCAST ");
                 option = Integer.parseInt(scanner.nextLine().trim());
 
                 // IF option == 1 THEN — send a broadcast message
@@ -139,9 +143,10 @@ public class ChatClient extends UnicastRemoteObject implements Recipient {
                     client.checkBroadcast();
                 }
 
-                // IF option != 1 OR option != 2 THEN — invalid selection
-                if (option != 1 || option != 2) {
+                // IF option != 1 AND option != 2 THEN — invalid selection
+                if (option != 1 && option != 2) {
                     System.out.println("INVALID INPUT\n");
+                    System.out.println(option + "\n");
                 }
 
             } while (option != 99);  // 99 is the exit value to exit the loop
